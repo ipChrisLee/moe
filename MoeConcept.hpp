@@ -11,6 +11,17 @@
 
 namespace moe {
 
+
+template<typename To, typename From>
+To * dyn_cast_up_get(std::unique_ptr<From> & fromP) {
+	return dynamic_cast<To *>(fromP.get());
+}
+
+template<typename To, typename From>
+To * dyn_cast_up_get(const std::unique_ptr<From> & fromP) {
+	return dynamic_cast<To *>(fromP.get());
+}
+
 class Cloneable {
   protected:
 	[[nodiscard]] virtual std::unique_ptr<Cloneable>
@@ -39,6 +50,24 @@ class Cloneable {
 	
 	virtual ~Cloneable() = default;
 };
+
+
+template<typename To, typename From>
+std::unique_ptr<To> dyn_cast_up(std::unique_ptr<From> && fromP) {
+	//  return nullptr if source pointer is nullptr.
+	if (!fromP) { return std::unique_ptr<To>(nullptr); }
+	To * p = dynamic_cast<To *>(fromP.release());
+	if (!p) {
+		throw std::invalid_argument(
+			moe::concat_all(
+				"dyn_cast_up failed. From [",
+				typeid(From).name(), "*] to [",
+				typeid(To).name(), "*]."
+			)
+		);
+	}
+	return std::unique_ptr<To>(p);
+}
 
 class Cutable {
   protected:

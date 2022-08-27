@@ -16,10 +16,8 @@ namespace moe {
 template<typename ... Ts>
 std::string concat_all(Ts && ... ts) {
 	auto ss = std::stringstream();
-	((ss << ts), ...);
-	auto res = std::string();
-	ss >> res;
-	return res;
+	(ss<<...<<ts);
+	return ss.str();
 }
 
 template<typename T>
