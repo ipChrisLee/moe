@@ -1,0 +1,4 @@
+CMakeLists.txt
+demo.cpp
+testDir/*
+cmake-build-debug
