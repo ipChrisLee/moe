@@ -3,3 +3,4 @@ demo.cpp
 testDir/*
 cmake-build-debug
 .idea
+!.gitignore
