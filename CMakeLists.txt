@@ -18,5 +18,5 @@ target_include_directories(
 		moe PUBLIC moe
 )
 
-add_executable(moe_demo moe/demo.cpp)
+add_executable(moe_demo demo.cpp)
 target_link_libraries(moe_demo moe)
