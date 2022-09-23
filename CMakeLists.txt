@@ -12,7 +12,7 @@ add_compile_options(
 add_link_options(-lpthread -lm -v -pthread)
 
 add_library(
-		moe STATIC moe/setdecorator.cpp moe/ArgParser.cpp moe/MoeConcept.cpp moe/STLPro.cpp
+		moe SHARED moe/decorator.cpp moe/ArgParser.cpp moe/MoeConcept.cpp moe/STLPro.cpp
 )
 target_include_directories(
 		moe PUBLIC moe
