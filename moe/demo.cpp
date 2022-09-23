@@ -1,9 +1,9 @@
 #include <iostream>
 #include <iomanip>
 
-#include "src/setdecorator.hpp"
-#include "src/ArgParser.hpp"
-#include "src/STLPro.hpp"
+#include "setdecorator.hpp"
+#include "ArgParser.hpp"
+#include "STLPro.hpp"
 
 
 int main() {
