@@ -1,6 +1,6 @@
 CMakeLists.txt
 demo.cpp
-testDir/*
+testDir
 cmake-build-debug
 .idea
 !.gitignore
