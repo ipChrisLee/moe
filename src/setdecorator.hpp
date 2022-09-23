@@ -51,4 +51,7 @@ std::string set_decorator(T ... decorators) {
 	return res;
 }
 
+std::string_view reset_decorator();
+
+
 }

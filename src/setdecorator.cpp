@@ -70,4 +70,8 @@ std::string_view decorator_to_str(Decorator decorator) {
 	return s;
 }
 
+std::string_view reset_decorator() {
+	return decorator_to_str(Decorator::reset);
+}
+
 }
