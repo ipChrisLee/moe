@@ -23,7 +23,7 @@ ArgOption::ArgOption(
 	callOptArg(std::move(callOptArg)) {
 	if (!this->callOptArg) {
 		throw std::logic_error(
-			"callOptArg should not be null, you can use EmptyFunction instead."
+			"`callOptArg` should not be null, you can use `EmptyFunction` instead."
 		);
 	}
 }
@@ -47,7 +47,7 @@ checkArgOptions(const std::vector<ArgOption> & options) {
 	);
 	if (!checked) {
 		throw std::invalid_argument(
-			"For every ArgOption, there is either longOpt or shortOpt"
+			"For every `ArgOption`, there is either a `longOpt` or a `shortOpt`."
 		);
 	}
 	std::for_each(
@@ -63,7 +63,7 @@ checkArgOptions(const std::vector<ArgOption> & options) {
 		}
 	);
 	if (!checked) {
-		throw std::invalid_argument("Duplicate opt!");
+		throw std::invalid_argument("Duplicate opt name!");
 	}
 	return {int(shortOptionCnt.size()), int(longOptionCnt.size())};
 }
@@ -138,7 +138,6 @@ int ArgParser::parse(int argc, char * argv[]) {
 					"Missing option argument of option."
 				);
 			}
-			
 			default:
 				//  short option or error
 				auto found = false;

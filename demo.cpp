@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 
-#include "setdecorator.hpp"
+#include "decorator.hpp"
 #include "ArgParser.hpp"
 #include "STLPro.hpp"
 
