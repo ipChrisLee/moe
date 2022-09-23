@@ -18,7 +18,7 @@ This lib provides some useful tools for C++ coding:
 
   ![](ref_of_readme/set_decorator_demo.png)
 
-* `ArgParser` are like python lib [argparser](https://docs.python.org/3/library/argparse.html), makes it easy to write user-friendly command-line interfaces:
+* `ArgParser` is like python lib [argparser](https://docs.python.org/3/library/argparse.html), makes it easy to write user-friendly command-line interfaces:
 
   For example, for llvm command line options, you can just code:
 
@@ -73,11 +73,11 @@ This lib provides some useful tools for C++ coding:
   auto upB=moe::dyn_cast_up<B>(upA->clone_to_unique_ptr());
   ```
 
-  `clone_to_unique_ptr` will check if the entity who calls `clone_to_unique_ptr_to_impl` has the same type of what it clones. This can prevent you from forgetting implementing `clone_to_unique_ptr_to_impl` of derived class.
+  `clone_to_unique_ptr` will check if the entity who calls `clone_to_unique_ptr_to_impl` has the same type of what it clones to. This can prevent you from forgetting implementing `clone_to_unique_ptr_to_impl` of derived class.
 
 * Some string support:
 
-  `concat_all` can concat all things into one string (if you write `operatr<<(std::ostream &, T t)`). For example:
+  `concat_all` can concat all things into one string (if you have implemented `operatr<<(std::ostream &, T t)`). For example:
 
   ```c++
   auto res=moe::concat_all(1, std::setprecision(1), 0.234, " 233", "?", 114514);
