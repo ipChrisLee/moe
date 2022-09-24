@@ -19,5 +19,4 @@ std::string format_str(const std::string & format, Args ... args) {
 	std::snprintf(buf.get(), size, format.c_str(), args ...);
 	return {buf.get(), buf.get() + size - 1};
 }
-
 }
