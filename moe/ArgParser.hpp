@@ -32,7 +32,7 @@ class ArgParser {
 	ArgParser();
 	
 	template<typename ... T>
-	void add_option(T ... t) {
+	void emplace_option(T ... t) {
 		options.template emplace_back(std::move(t)...);
 	}
 	

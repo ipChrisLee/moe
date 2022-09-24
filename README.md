@@ -30,27 +30,27 @@ This lib provides some useful tools for C++ coding:
   auto fromFilePaths = std::vector<std::string>();
   auto toFilePath = std::string();
   auto dotFilePath = std::string();
-  argParser.add_option(
+  argParser.emplace_option(
       'g', nullptr, false, [&addDebugInfo](const char *) {
           addDebugInfo = true;
       }
   );
-  argParser.add_option(
+  argParser.emplace_option(
       0, "emit-llvm", false, [&emitLLVM](const char *) {
           emitLLVM = true;
       }
   );
-  argParser.add_option(
+  argParser.emplace_option(
       'v', "verbose", false, [&verbose](const char *) {
           verbose = true;
       }
   );
-  argParser.add_option(
+  argParser.emplace_option(
       'o', nullptr, true, [&toFilePath](const char * s) {
           toFilePath = s;
       }
   );
-  argParser.add_option(
+  argParser.emplace_option(
       0, "dot", true, [&dotFilePath](const char * s) {
           dotFilePath = s;
       }
