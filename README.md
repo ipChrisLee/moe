@@ -88,11 +88,16 @@ This lib provides some useful tools for C++ coding:
 To use this library with CMake, just clone this repo to the root of your project (we call it `projRoot`), and add these statements to your `projRoot/CMakeLists.txt`:
 
 ```cmake
-target_link_libraries(YOUR_TARGET PUBLIC moe)
-target_include_directories(YOUR_TARGET PUBLIC moe)
+include_directories(./moe)
+```
+
+And add content below to your target.
+
+```cmake
+target_link_libraries(YOUR_TARGET moe)
 ```
 
 And then you can use `#include <moe/decorator.hpp>`
 
-If you don't want `moe_demo` be one of your targets, just delete last two line of `moe/CMakeLists.txt`.
+If you don't want `moe_demo` be one of your targets, just delete last two line of `moe/CMakeLists.txt`.s
 
