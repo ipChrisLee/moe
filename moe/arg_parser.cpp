@@ -2,9 +2,9 @@
 // Created by 李远铄 on 2022/8/27.
 //
 
-#include "ArgParser.hpp"
-#include "FmtString.hpp"
-#include "EmptyFunction.hpp"
+#include "arg_parser.hpp"
+#include "fmt_string.hpp"
+#include "empty_function.hpp"
 
 #include <getopt.h>
 #include <map>

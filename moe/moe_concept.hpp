@@ -6,7 +6,7 @@
 
 #include <memory>
 #include <stdexcept>
-#include "STLPro.hpp"
+#include "stl_pro.hpp"
 
 
 namespace moe {

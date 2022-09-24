@@ -2,8 +2,8 @@
 #include <iomanip>
 
 #include "decorator.hpp"
-#include "ArgParser.hpp"
-#include "STLPro.hpp"
+#include "arg_parser.hpp"
+#include "stl_pro.hpp"
 
 
 int main() {
