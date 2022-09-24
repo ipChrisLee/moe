@@ -15,7 +15,7 @@ add_library(
 		moe SHARED moe/decorator.cpp moe/ArgParser.cpp moe/MoeConcept.cpp moe/STLPro.cpp
 )
 target_include_directories(
-		moe PUBLIC moe
+		moe PUBLIC ./moe
 )
 
 add_executable(moe_demo demo.cpp)
