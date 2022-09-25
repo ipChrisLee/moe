@@ -8,6 +8,7 @@
 #include <string>
 #include <sstream>
 #include <set>
+#include <vector>
 
 
 namespace moe {
@@ -25,5 +26,15 @@ bool enum_in(T val, std::set<T> enumSet) {
 	static_assert(std::is_enum<T>().value);
 	return enumSet.count(val);
 }
+
+std::vector<std::string>
+split_string_on_char(
+	const std::string & str, const std::vector<char> & delimiters = {' ', '\n'}
+);
+
+std::vector<std::string>
+split_string_on_char(
+	const std::string & str, std::string_view delimiters = " \n"
+);
 
 }

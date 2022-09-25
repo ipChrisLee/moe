@@ -10,6 +10,10 @@
 int main() {
 	std::cout << moe::set_decorator(moe::Decorator::c_red) << "Hello!"
 	          << moe::reset_decorator() << std::endl;
-	moe_assert(1 == 2, "233");
+	auto res = moe::split_string_on_char("12 23 abc \n\n xy \n", {'\n', ' '});
+	std::for_each(
+		res.begin(), res.end(), [](const auto & s) { std::cout << s << std::endl; }
+	);
+	
 	return 0;
 }
