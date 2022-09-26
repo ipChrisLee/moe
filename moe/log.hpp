@@ -10,6 +10,8 @@
 #include "time_pro.hpp"
 #include <string>
 #include <sstream>
+#include <sstream>
+#include "restorer.hpp"
 
 
 namespace moe {
@@ -39,6 +41,13 @@ class LogContext {
 	
 	[[nodiscard]] std::string
 	to_string(std::string_view codeFile, std::string_view codeLine) const {
+		auto fill_zero = [](i32 x) {
+			auto ss = std::stringstream();
+			ss << std::setfill('0') << std::setw(2) << x;
+			auto res = std::string();
+			ss >> res;
+			return res;
+		};
 		auto res = std::string();
 		for (auto item: items) {
 			switch (item) {
@@ -58,14 +67,14 @@ class LogContext {
 					res.push_back(':');
 					break;
 				case LogContextItem::time_hour: {
-					res += std::to_string(now::hour());
+					res += fill_zero(now::hour());
 					break;
 				}
 				case LogContextItem::time_minute:
-					res += std::to_string(now::minute());
+					res += fill_zero(now::minute());
 					break;
 				case LogContextItem::time_second:
-					res += std::to_string(now::second());
+					res += fill_zero(now::second());
 					break;
 				case LogContextItem::ch_l_bracket:
 					res.push_back('[');
@@ -80,7 +89,9 @@ class LogContext {
 };
 
 class STDLog {
-	friend void register_std_log(std::string_view logFilePath, LogContext header);
+	friend void register_std_log(
+		std::string_view logFilePath, std::string_view sep, LogContext header
+	);
 	
 	friend STDLog & std_log();
   
@@ -90,38 +101,73 @@ class STDLog {
   protected:
 	std::ofstream ofs;
 	LogContext header;
+	std::string_view sep;
 	
-	STDLog(std::string_view logFilePath, LogContext header);
+	STDLog(std::string_view logFilePath, LogContext header, std::string_view sep);
   
   
   public:
 	bool enabled;
 	
+	void set_sep(std::string_view newSep) { sep = newSep; }
+	
 	template<typename  ... Ts>
 	void info(std::string_view codeFile, std::string_view codeLine, Ts  ... ts) {
 		if (enabled) {
 			ofs << header.to_string(codeFile, codeLine);
-			((ofs << ts), ...);
-			ofs << std::endl;
+			((ofs << ts << sep), ...);
+			if (sep == "\n") {
+			} else {
+				ofs << std::endl;
+			}
+			ofs.flush();
 		}
 	}
 };
 
 void register_std_log(
-	std::string_view logFilePath, LogContext header = LogContext(
-	{
-		LogContextItem::ch_l_bracket, LogContextItem::code_file,
-		LogContextItem::ch_colon, LogContextItem::ch_colon,
-		LogContextItem::code_line, LogContextItem::ch_r_bracket,
-		LogContextItem::ch_space,
-		LogContextItem::ch_colon,
-		LogContextItem::ch_space,
-	}
-));
+	std::string_view logFilePath, std::string_view sep = " ",
+	LogContext header = LogContext(
+		{
+			LogContextItem::ch_l_bracket, LogContextItem::code_file,
+			LogContextItem::ch_colon, LogContextItem::ch_colon,
+			LogContextItem::code_line, LogContextItem::ch_r_bracket,
+			LogContextItem::ch_space,
+			LogContextItem::ch_colon,
+			LogContextItem::ch_space,
+		}
+	));
 
 STDLog & std_log();
 
 #define moe_slog_info(...) moe::std_log().info(MOE_CONTEXT_FILE,MOE_CONTEXT_LINE,__VA_ARGS__)
+
+#define moe_slog_enable_here() moe_r_set(moe::std_log().enabled, true)
+#define moe_slog_disable_here() moe_r_set(moe::std_log().enabled, false)
+
+class LocalLog {
+  protected:
+	std::ofstream ofs;
+	std::string_view sep;
+	bool enabled;
+  
+  public:
+	explicit LocalLog(
+		std::string_view logFilePath, std::string_view sep = " ", bool enable = true
+	);
+	
+	template<typename  ... Ts>
+	void info(Ts  ... ts) {
+		if (enabled) {
+			((ofs << ts << sep), ...);
+			if (sep == "\n") {
+			} else {
+				ofs << std::endl;
+			}
+			ofs.flush();
+		}
+	}
+};
 
 
 }

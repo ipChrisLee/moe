@@ -1,0 +1,3 @@
+[/Users/lee/Main/Proj/moe/demo.cpp::41 22:38]Hello 01 
+[/Users/lee/Main/Proj/moe/demo.cpp::42 22:38]Hello 02 
+[/Users/lee/Main/Proj/moe/demo.cpp::15 22:38]Hello fun!  void fun() 
