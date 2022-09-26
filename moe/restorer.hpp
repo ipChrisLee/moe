@@ -37,4 +37,4 @@ class Restorer {
  * @note One line can only contain exact one macro.
  * @note Multiple usage of this macro in one scope will @b NOT cause fault.
  */
-#define moe_r_set(var, newVal) com::Restorer<decltype(var)> MOE_CONCAT(__restorer,__LINE__) ((var),(newVal))
+#define moe_r_set(var, newVal) moe::Restorer<decltype(var)> MOE_CONCAT(__restorer,__LINE__) ((var),(newVal))
