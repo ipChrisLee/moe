@@ -7,6 +7,17 @@
 #include "rt_check.hpp"
 
 
+struct D {
+	~D() {
+		std::cout << MOE_FUNC_INFO << std::endl;
+	}
+};
+
+void fun() {
+	static D d;
+	std::cout << MOE_FUNC_INFO << std::endl;
+}
+
 int main() {
 	std::cout << moe::set_decorator(moe::Decorator::c_red) << "Hello!"
 	          << moe::reset_decorator() << std::endl;
@@ -14,6 +25,9 @@ int main() {
 	std::for_each(
 		res.begin(), res.end(), [](const auto & s) { std::cout << s << std::endl; }
 	);
+	moe_assert(res[0] == "13", "?");
+	fun();
+	fun();
 	
 	return 0;
 }

@@ -19,6 +19,7 @@ add_library(
 		moe/stl_pro.cpp
 		moe/rt_check.cpp
 		moe/debugger.cpp
+		moe/log.cpp
 )
 target_include_directories(
 		moe PUBLIC ./moe
