@@ -19,12 +19,12 @@ std::string_view get_exit_info(ExitType panicType);
 
 [[noreturn]] void moe_exit(ExitType exitType);
 
-#define moe_exit_with_reason()
-
 #define moe_panic(msg) { \
     std::cerr << "Panic at [" MOE_CODE_POS "] with message [" msg "]." << std::endl; \
     moe_exit(moe::ExitType::panic);                         \
 }
+
+#define moe_todo() static_assert(0)
 
 #define moe_assert_selector(arg0, arg1, arg2, ...) arg2
 
