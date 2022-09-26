@@ -20,7 +20,8 @@ add_library(
 		moe/rt_check.cpp
 		moe/debugger.cpp
 		moe/log.cpp
-		moe/restorer.cpp moe/restorer.hpp)
+		moe/restorer.cpp
+		moe/time_pro.cpp)
 target_include_directories(
 		moe PUBLIC ./moe
 )
