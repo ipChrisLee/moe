@@ -9,6 +9,8 @@
 #include <sstream>
 #include <set>
 #include <vector>
+#include "moe_typedef.hpp"
+#include "rt_check.hpp"
 
 
 namespace moe {
@@ -36,5 +38,20 @@ std::vector<std::string>
 split_string_on_char(
 	const std::string & str, std::string_view delimiters = " \n"
 );
+
+//  get vec[begin..end] (INCLUDE)
+//  for negative index idx, it will convert to sz+idx
+template<typename T>
+std::vector<T> sub_vector(std::vector<T> && vec, i32 begin, i32 end) {
+	auto sz = i32(vec.size());
+	if (begin < 0) { begin = begin + end; }
+	if (end < 0) { end = sz + end; }
+	moe_assert(begin < sz && end < sz, "Out of range.")
+	auto res = std::vector<T>();
+	for (auto i = begin; i <= end; ++i) {
+		res.template emplace_back(std::move(vec[i]));
+	}
+	return res;
+}
 
 }
