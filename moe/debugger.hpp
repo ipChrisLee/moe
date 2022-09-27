@@ -7,5 +7,5 @@
 
 
 #define moe_dbg(x) if(1) { \
-    std::cerr << MOE_CODE_POS << " => [" << #x << "] : " << x << std::endl\
+    std::cerr << MOE_CODE_POS << " => [" #x "] : " << x << std::endl; \
 }

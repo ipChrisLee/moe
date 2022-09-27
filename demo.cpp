@@ -54,5 +54,6 @@ int main() {
 	moe_assert(res[0] == "12", "?");
 	fun();
 	gun();
+	moe_dbg("a");
 	return 0;
 }
