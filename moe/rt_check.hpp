@@ -20,14 +20,14 @@ std::string_view get_exit_info(ExitType panicType);
 
 [[noreturn]] void moe_exit(ExitType exitType);
 
-#define moe_panic(msg) { \
+#define moe_panic(msg) if(1){ \
     std::cerr << "Panic at [" MOE_CODE_POS "] with message [" msg "]." << std::endl; \
     moe_exit(moe::ExitType::panic);                         \
 }
 
 //  compile-time `to-do` check or run-time `to-do` check
 #define moe_todo() static_assert(0, "TODO")
-#define moe_rt_todo() { \
+#define moe_rt_todo() if(1) { \
     std::cerr << "TODO on [" MOE_CODE_POS "]." <<std::endl; \
     moe::moe_exit(moe::ExitType::run_to_todo_func); \
 }
