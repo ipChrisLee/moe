@@ -12,6 +12,7 @@ namespace moe {
 enum class ExitType : i8 {
 	assert_failed = -128,
 	panic,
+	run_to_todo_func,
 };
 
 
@@ -24,7 +25,12 @@ std::string_view get_exit_info(ExitType panicType);
     moe_exit(moe::ExitType::panic);                         \
 }
 
-#define moe_todo() static_assert(0)
+//  compile-time `to-do` check or run-time `to-do` check
+#define moe_todo() static_assert(0, "TODO")
+#define moe_rt_todo() { \
+    std::cerr << "TODO on [" MOE_CODE_POS "]." <<std::endl; \
+    moe::moe_exit(moe::ExitType::run_to_todo_func); \
+}
 
 #define moe_assert_selector(arg0, arg1, arg2, ...) arg2
 

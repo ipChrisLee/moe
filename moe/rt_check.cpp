@@ -9,6 +9,8 @@ std::string_view get_exit_info(ExitType panicType) {
 			return "Assert failed.";
 		case ExitType::panic:
 			return "Panic.";
+		case ExitType::run_to_todo_func:
+			return "Run to a `todo`.";
 	}
 }
 
