@@ -3,7 +3,12 @@
 #include "moe_macro.hpp"
 #include <iostream>
 #include <string_view>
+#include <string>
 
 
-#define moe_dbg(x) std::cerr << MOE_CODE_POS << " => [" << #x << "] : " << x << std::endl
+#define moe_dbg(x) { \
+    std::cerr << MOE_CODE_POS << " => [" << #x << "] : " << x << std::endl\
+}
 
+
+}
