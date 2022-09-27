@@ -10,5 +10,3 @@
     std::cerr << MOE_CODE_POS << " => [" << #x << "] : " << x << std::endl\
 }
 
-
-}
