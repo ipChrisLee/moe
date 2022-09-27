@@ -36,9 +36,14 @@ LogContext::LogContext(std::vector<LogContextItem> items) :
 	items(std::move(items)) {
 }
 
-LocalLog::LocalLog(std::string_view logFilePath, std::string_view sep, bool enable)
-	: sep(sep), enabled(enable) {
+LocalLog::LocalLog(
+	std::string_view logFilePath, std::string_view sep, bool enable,
+	const std::string & head
+) : sep(sep), enabled(enable) {
 	ofs = std::ofstream(logFilePath);
+	if (!head.empty()) {
+		ofs << head << std::endl;
+	}
 }
 }
 

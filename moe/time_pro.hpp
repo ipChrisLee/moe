@@ -18,6 +18,9 @@ i32 minute();
 //  Second of minute, 60 split.
 i32 second();
 
+//  24 hour time
+std::string formatTime();
+
 }
 
 

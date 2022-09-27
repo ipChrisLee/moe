@@ -1,3 +1,5 @@
+//  https://en.cppreference.com/w/cpp/io/manip/put_time
+
 #include "time_pro.hpp"
 
 #include <sstream>
@@ -57,5 +59,18 @@ int second() {
 	ss >> res;
 	return res;
 }
+
+std::string formatTime() {
+	std::time_t
+		t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+	std::tm ltime{ };
+	localtime_r(&t, &ltime);
+	std::stringstream ss;
+	ss << std::put_time(&ltime, "%F %R") << std::endl;
+	auto res = std::string();
+	std::getline(ss, res);
+	return res;
+}
+
 }
 

@@ -153,7 +153,8 @@ class LocalLog {
   
   public:
 	explicit LocalLog(
-		std::string_view logFilePath, std::string_view sep = " ", bool enable = true
+		std::string_view logFilePath, std::string_view sep = " ", bool enable = true,
+		const std::string & head = ""
 	);
 	
 	template<typename  ... Ts>
@@ -169,5 +170,8 @@ class LocalLog {
 	}
 };
 
-
+#define moe_llog(logFilePath, sep, enable, headComment) \
+    moe::LocalLog(logFilePath, sep, enable, moe::concat_all(headComment "\t", MOE_CODE_POS "\t", moe::now::formatTime()))
+	
+	
 }

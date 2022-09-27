@@ -8,17 +8,19 @@
 #include "log.hpp"
 #include "restorer.hpp"
 #include "debugger.hpp"
+#include "time_pro.hpp"
 
 
 void fun() {
 	moe_slog_enable_here();
 	moe_slog_info("Hello fun! ", MOE_FUNC_INFO);
-	
 }
 
 void gun() {
-	auto lLog = moe::LocalLog("demo_folder/local_log.txt", "\n", true);
+	auto lLog = moe_llog("demo_folder/local_log.txt", "\n", true, "//");
 	lLog.info("Hello!");
+	lLog.info("a -> b");
+	lLog.info("b -> c");
 }
 
 
@@ -43,7 +45,7 @@ int main() {
 	moe_slog_disable_here();
 	moe_slog_info("Hello 03");      //  disabled
 	
-	std::cout << moe::set_decorator(moe::Decorator::c_red) << "Hello!"
+	std::cout << moe::set_decorator(moe::Decorator::c_blue) << moe::now::formatTime()
 	          << moe::reset_decorator() << std::endl;
 	auto res = moe::split_string_on_char("12 23 abc \n\n xy \n", {'\n', ' '});
 	std::for_each(
