@@ -5,6 +5,8 @@
 #include "arg_parser.hpp"
 #include "fmt_string.hpp"
 #include "empty_function.hpp"
+#include "stl_pro.hpp"
+#include "debugger.hpp"
 
 #include <getopt.h>
 #include <map>
@@ -14,21 +16,20 @@
 namespace moe {
 
 ArgOption::ArgOption(
-	char shortOpt, const char * longOpt, bool requireArg,
-	std::function<void(const char *)> callOptArg
+	std::optional<char> shortOpt, std::optional<std::string> longOpt, bool requireArg,
+	std::function<void(std::string_view)> callOptArg,
+	std::optional<std::string> description
 ) :
 	shortOpt(shortOpt),
-	longOpt(longOpt),
+	longOpt(std::move(longOpt)),
 	requireArg(requireArg),
-	callOptArg(std::move(callOptArg)) {
-	if (!this->callOptArg) {
-		throw std::logic_error(
-			"`callOptArg` should not be null, you can use `EmptyFunction` instead."
-		);
-	}
+	callOptArg(std::move(callOptArg)),
+	description(std::move(description)) {
+	moe_assert(this->callOptArg,
+	           "You should pass a function to parameter `callOptArg`. Use `empty_func<void,std::string_view>` instead.");
 }
 
-inline std::tuple<int, int>
+static std::tuple<int, int>
 checkArgOptions(const std::vector<ArgOption> & options) {
 	auto checked = true;
 	auto longOptionCnt = std::map<std::string, int>();
@@ -37,10 +38,10 @@ checkArgOptions(const std::vector<ArgOption> & options) {
 		options.begin(), options.end(),
 		[&longOptionCnt, &shortOptionCnt, &checked](const ArgOption & argOption) {
 			if (argOption.longOpt) {
-				++longOptionCnt[argOption.longOpt];
+				++longOptionCnt[argOption.longOpt.value()];
 			}
 			if (argOption.shortOpt) {
-				++shortOptionCnt[argOption.shortOpt];
+				++shortOptionCnt[argOption.shortOpt.value()];
 			}
 			checked &= (argOption.longOpt || argOption.shortOpt);
 		}
@@ -77,7 +78,7 @@ int ArgParser::parse(int argc, char * argv[]) {
 		options.begin(), options.end(),
 		[&p](const ArgOption & argOption) {
 			if (argOption.longOpt) {
-				p->name = argOption.longOpt;
+				p->name = argOption.longOpt.value().c_str();
 				p->has_arg = argOption.requireArg ? required_argument : no_argument;
 				p->flag = nullptr;
 				p->val = 0;
@@ -91,7 +92,7 @@ int ArgParser::parse(int argc, char * argv[]) {
 		options.begin(), options.end(),
 		[&shortOptionsStr](const ArgOption & argOption) {
 			if (argOption.shortOpt) {
-				shortOptionsStr.push_back(argOption.shortOpt);
+				shortOptionsStr.push_back(argOption.shortOpt.value());
 				if (argOption.requireArg) {
 					shortOptionsStr.push_back(':');
 				}
@@ -146,7 +147,7 @@ int ArgParser::parse(int argc, char * argv[]) {
 					[c, &found](const ArgOption & argOption) {
 						if (argOption.shortOpt == c) {
 							found = true;
-							argOption.callOptArg(optarg);
+							argOption.callOptArg(optarg ? optarg : "");
 						}
 					}
 				);
@@ -163,12 +164,38 @@ int ArgParser::parse(int argc, char * argv[]) {
 }
 
 void ArgParser::add_func_to_handle_non_option_arg(
-	std::function<void(const char *)> paraFuncToHandleNonOptionArg
+	std::function<void(std::string_view)> paraFuncToHandleNonOptionArg
 ) {
 	funcToHandleNonOptionArg = std::move(paraFuncToHandleNonOptionArg);
 }
 
-ArgParser::ArgParser() : funcToHandleNonOptionArg(empty_func<void, const char *>) {
+ArgParser::ArgParser(std::string_view parserName) :
+	parserName(parserName), funcToHandleNonOptionArg(empty_func<void, std::string_view>) {
+}
+
+std::string ArgParser::get_help() const {
+	auto res = std::string();
+	res += moe::concat_all("Argument Parser [", parserName, "]");
+	for (auto & option: options) {
+		res += "\t";
+		if (option.shortOpt) {
+			res += moe::concat_all("-", option.shortOpt.value(), ' ');
+		}
+		if (option.longOpt) {
+			res += moe::concat_all("--", option.longOpt.value(), ' ');
+		}
+		if (option.requireArg) {
+			res += "... ";
+		}
+		if (option.description) {
+			res += moe::concat_all("[", option.description.value(), "]");
+		}
+		res += "\n";
+	}
+	if (funcToHandleNonOptionArg) {
+		res += "\tPositional arguments are taking.\n";
+	}
+	return res;
 }
 
 }

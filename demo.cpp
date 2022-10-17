@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <charconv>
 
 #include "decorator.hpp"
 #include "arg_parser.hpp"
@@ -9,6 +10,7 @@
 #include "restorer.hpp"
 #include "debugger.hpp"
 #include "time_pro.hpp"
+#include "empty_function.hpp"
 
 
 void fun() {
@@ -24,7 +26,42 @@ void gun() {
 }
 
 
-int main() {
+int main([[maybe_unused]]int argc, [[maybe_unused]]char ** argv) {
+	struct CompilerInfo {
+		bool help;
+		int optiLevel;
+		std::string outPath;
+		std::vector<std::string> files;
+	} cInfo{false, 0, "", { }};
+	auto argParser = moe::ArgParser("STD Compiler");
+	argParser.add_option(
+		moe::ArgOption(
+			'h', std::nullopt, false, [&cInfo](std::string_view) {
+				cInfo.help = true;
+			}, "Print help info before parsing."
+		)
+	);
+	argParser.add_option(
+		moe::ArgOption(
+			'o', std::nullopt, true, [&cInfo](std::string_view path) {
+				cInfo.outPath = path;
+			}, "Output exe file path."
+		)
+	);
+	argParser.add_option(
+		moe::ArgOption(
+			'O', std::nullopt, true, [&cInfo](std::string_view optiLevel) {
+				std::from_chars(optiLevel.begin(), optiLevel.end(), cInfo.optiLevel);
+			}, "Opti level of your compiler."
+		)
+	);
+	argParser.add_func_to_handle_non_option_arg(
+		[&cInfo](std::string_view path) {
+			cInfo.files.emplace_back(path);
+		}
+	);
+	argParser.parse(argc, argv);
+	
 	moe::register_std_log(
 		"demo_folder/log.txt", " ",
 		moe::LogContext(
@@ -54,6 +91,9 @@ int main() {
 	moe_assert(res[0] == "12", "?");
 	fun();
 	gun();
-	moe_dbg("a");
+//	moe_dbg("a");
+	auto * a = new int(10);
+	std::cerr << *a << std::endl;
+	moe_dbg(a, *a);
 	return 0;
 }

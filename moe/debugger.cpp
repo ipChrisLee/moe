@@ -3,3 +3,10 @@
 //
 
 #include "debugger.hpp"
+#include "rt_check.hpp"
+
+
+namespace moe {
+
+
+}
