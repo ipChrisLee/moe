@@ -6,10 +6,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED true)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_GLIBCXX_DEBUG")
 
 add_compile_options(
-		-g -Wall -Werror -Wextra -pthread
+		-g -Wall -Werror -Wextra
 )
 
-add_link_options(-lpthread -lm -v -pthread)
+add_link_options(-lm -v)
 
 add_library(
 		moe SHARED
