@@ -31,12 +31,12 @@ bool enum_in(T val, std::set<T> enumSet) {
 
 std::vector<std::string>
 split_string_on_char(
-	const std::string & str, const std::vector<char> & delimiters = {' ', '\n'}
+	std::string_view str, const std::vector<char> & delimiters = {' ', '\n'}
 );
 
 std::vector<std::string>
 split_string_on_char(
-	const std::string & str, std::string_view delimiters = " \n"
+	std::string_view str, std::string_view delimiters = " \n"
 );
 
 //  get vec[begin..end] (INCLUDE)

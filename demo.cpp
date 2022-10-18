@@ -84,7 +84,9 @@ int main([[maybe_unused]]int argc, [[maybe_unused]]char ** argv) {
 	
 	std::cout << moe::set_decorator(moe::Decorator::c_blue) << moe::now::formatTime()
 	          << moe::reset_decorator() << std::endl;
-	auto res = moe::split_string_on_char("12 23 abc \n\n xy \n", {'\n', ' '});
+	using namespace std::string_literals;
+	auto s = "12 23 abc \n\n xy \n"s;
+	auto res = moe::split_string_on_char(s, {'\n', ' '});
 	std::for_each(
 		res.begin(), res.end(), [](const auto & s) { std::cout << s << std::endl; }
 	);

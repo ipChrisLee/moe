@@ -7,15 +7,15 @@
 namespace moe {
 
 std::vector<std::string>
-split_string_on_char(const std::string & str, const std::vector<char> & delimiters) {
+split_string_on_char(std::string_view str, const std::vector<char> & delimiters) {
 //	 pos_end, delim_len = delimiter.length();
 	auto res = std::vector<std::string>();
-	auto posStart = std::string::size_type(0);
+	auto posStart = std::string_view::size_type(0);
 	while (posStart < str.size()) {
 		auto iFirstDel = str.size();
 		for (auto ch: delimiters) {
 			auto i = str.find(ch, posStart);
-			if (i != std::string::npos) {
+			if (i != std::string_view::npos) {
 				iFirstDel = std::min(iFirstDel, i);
 			}
 		}
@@ -29,15 +29,15 @@ split_string_on_char(const std::string & str, const std::vector<char> & delimite
 
 std::vector<std::string>
 split_string_on_char(
-	const std::string & str, std::string_view delimiters
+	std::string_view str, std::string_view delimiters
 ) {
 	auto res = std::vector<std::string>();
-	auto posStart = std::string::size_type(0);
+	auto posStart = std::string_view::size_type(0);
 	while (posStart < str.size()) {
 		auto iFirstDel = str.size();
 		for (auto ch: delimiters) {
 			auto i = str.find(ch, posStart);
-			if (i != std::string::npos) {
+			if (i != std::string_view::npos) {
 				iFirstDel = std::min(iFirstDel, i);
 			}
 		}
