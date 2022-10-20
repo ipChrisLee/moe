@@ -44,6 +44,7 @@ LocalLog::LocalLog(
 	if (!head.empty()) {
 		ofs << head << std::endl;
 	}
+	moe_assert(!sep.find('\n'), "Sep should not contain '\\n'!");
 }
 }
 

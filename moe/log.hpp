@@ -154,6 +154,9 @@ class LocalLog {
   public:
 	i32 indent = 0;
 	
+	/**
+	 * @note Notice that sep should not be newline.
+	 */
 	explicit LocalLog(
 		std::string_view logFilePath, std::string_view sep = " ", bool enable = true,
 		const std::string & head = ""
@@ -161,7 +164,6 @@ class LocalLog {
 	
 	/**
 	 * @brief Print ts. Every ts should have operator << override. Print newline on the last line.
-	 * @note If you specify sep as newline, here will print indent ONLY on the first line.
 	 */
 	template<typename  ... Ts>
 	void info(Ts  ... ts) {
@@ -170,11 +172,7 @@ class LocalLog {
 				ofs << '\t';
 			}
 			((ofs << ts << sep), ...);
-			if (sep == "\n") {
-			} else {
-				ofs << std::endl;
-			}
-			ofs.flush();
+			ofs << std::endl;
 		}
 	}
 	
