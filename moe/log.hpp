@@ -150,6 +150,7 @@ class LocalLog {
 	std::ofstream ofs;
 	std::string_view sep;
 	bool enabled;
+	i32 indent = 0;
   
   public:
 	explicit LocalLog(
@@ -157,9 +158,16 @@ class LocalLog {
 		const std::string & head = ""
 	);
 	
+	/**
+	 * @brief Print ts. Every ts should have operator << override. Print newline on the last line.
+	 * @note If you specify sep as newline, here will print indent ONLY on the first line.
+	 */
 	template<typename  ... Ts>
 	void info(Ts  ... ts) {
 		if (enabled) {
+			for (auto i = 0; i < indent; ++i) {
+				ofs << '\t';
+			}
 			((ofs << ts << sep), ...);
 			if (sep == "\n") {
 			} else {
@@ -167,6 +175,14 @@ class LocalLog {
 			}
 			ofs.flush();
 		}
+	}
+	
+	void add_indent(i32 a = 1) {
+		indent += a;
+	}
+	
+	i32 & set_indent() {
+		return indent;
 	}
 };
 
