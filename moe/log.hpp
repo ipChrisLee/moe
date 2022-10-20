@@ -181,7 +181,7 @@ class LocalLog {
 		indent += a;
 	}
 	
-	i32 & set_indent() {
+	i32 & get_indent() {
 		return indent;
 	}
 };
