@@ -25,6 +25,14 @@ void gun() {
 	lLog.info("b -> c");
 }
 
+struct Tes {
+	int a = 10;
+	
+	int & get_a() {
+		return a;
+	}
+} tes;
+
 
 int main([[maybe_unused]]int argc, [[maybe_unused]]char ** argv) {
 	struct CompilerInfo {
@@ -97,5 +105,8 @@ int main([[maybe_unused]]int argc, [[maybe_unused]]char ** argv) {
 	auto * a = new int(10);
 	std::cerr << *a << std::endl;
 	moe_dbg(a, *a);
+	moe_dbg(tes.get_a());
+	moe_r_set(tes.a, tes.get_a() + 1);
+	moe_dbg(tes.get_a());
 	return 0;
 }

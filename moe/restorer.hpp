@@ -29,7 +29,8 @@ class Restorer {
 	}
 };
 
-}/**
+}
+/**
  * @brief A macro for auto-restore set.
  * @details The value of @c var will be restored automatically when leaving the scope of this macro used.
  * @ref https://stackoverflow.com/questions/207965/general-way-to-reset-a-member-variable-to-its-original-value-using-the-stack
