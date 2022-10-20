@@ -150,9 +150,10 @@ class LocalLog {
 	std::ofstream ofs;
 	std::string_view sep;
 	bool enabled;
-	i32 indent = 0;
   
   public:
+	i32 indent = 0;
+	
 	explicit LocalLog(
 		std::string_view logFilePath, std::string_view sep = " ", bool enable = true,
 		const std::string & head = ""
@@ -181,9 +182,6 @@ class LocalLog {
 		indent += a;
 	}
 	
-	i32 & get_indent() {
-		return indent;
-	}
 };
 
 #define moe_llog(logFilePath, sep, enable, headComment) \
