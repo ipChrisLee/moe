@@ -19,10 +19,10 @@ void fun() {
 }
 
 void gun() {
-	auto lLog = moe_llog("demo_folder/local_log.txt", "\n", true, "//");
+	auto lLog = moe_llog("demo_folder/local_log.txt", " ", true, "//");
 	lLog.info("Hello!");
-	lLog.info("a -> b");
-	lLog.info("b -> c");
+	lLog.info("a -> b", 1);
+	lLog.info("b -> c", 2);
 }
 
 struct Tes {
@@ -82,13 +82,18 @@ int main([[maybe_unused]]int argc, [[maybe_unused]]char ** argv) {
 				moe::LogContextItem::time_hour,
 				moe::LogContextItem::ch_colon,
 				moe::LogContextItem::time_minute,
-				moe::LogContextItem::ch_r_bracket
+				moe::LogContextItem::ch_r_bracket,
+				moe::LogContextItem::ch_colon,
+				moe::LogContextItem::ch_space,
 			}
 		));
 	moe_slog_info("Hello 01");
 	moe_slog_info("Hello 02");
-	moe_slog_disable_here();
-	moe_slog_info("Hello 03");      //  disabled
+	{
+		moe_slog_disable_here();
+		moe_slog_info("Hello 03");      //  disabled
+	}
+	moe_slog_info("Hello 04");          //  normal
 	
 	std::cout << moe::set_decorator(moe::Decorator::c_blue) << moe::now::formatTime()
 	          << moe::reset_decorator() << std::endl;

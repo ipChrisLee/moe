@@ -18,9 +18,10 @@ STDLog & std_log() {
 void register_std_log(
 	std::string_view logFilePath, std::string_view sep, LogContext header
 ) {
-	moe_assert(!STDLog::upStdLog, "You have registered a log. Check your code!");
+	moe_assert(!STDLog::upStdLog, "You have registered a logger. Check your code!");
 	STDLog::upStdLog = std::unique_ptr<STDLog>(
 		new STDLog(logFilePath, std::move(header), sep));
+	moe_slog_info("Logger registered.");
 }
 
 STDLog::STDLog(

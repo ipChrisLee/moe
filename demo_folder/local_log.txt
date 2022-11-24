@@ -1,4 +1,4 @@
-//	File[/Users/lee/Main/Proj/moe/demo.cpp] Line[22]	2022-10-18 21:59
-Hello!
-a -> b
-b -> c
+//	File[/Users/lee/Main/Proj/moe/demo.cpp] Line[22]	2022-11-24 17:26
+Hello! 
+a -> b 1 
+b -> c 2 
