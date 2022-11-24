@@ -88,6 +88,7 @@ This lib provides some useful tools for C++ coding:
 To use this library with CMake, just clone this repo to the root of your project (we call it `projRoot`), and add these statements to your `projRoot/CMakeLists.txt`:
 
 ```cmake
+add_subdirectory(./moe)
 include_directories(./moe)
 ```
 
