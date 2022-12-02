@@ -44,7 +44,7 @@ LocalLog::LocalLog(
 ) : sep(sep), enabled(enable) {
 	ofs = std::ofstream(logFilePath);
 	moe_assert(ofs.is_open(), "LocalLog file open failed.");
-	if (!head.empty()) {
+	if (!head.empty() && enable) {
 		ofs << head << std::endl;
 	}
 	moe_assert(sep.find('\n') == std::string_view::npos, "Sep should not contain '\\n'!");
