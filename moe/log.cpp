@@ -30,6 +30,7 @@ STDLog::STDLog(
 	header(std::move(header)), sep(sep), enabled(true) {
 //	moe_assert(std::filesystem::exists(logFilePath), "File path does not exists!");
 	ofs = std::ofstream(logFilePath);
+	moe_assert(ofs.is_open(), "STDLog file open failed.");
 }
 
 
@@ -42,6 +43,7 @@ LocalLog::LocalLog(
 	const std::string & head
 ) : sep(sep), enabled(enable) {
 	ofs = std::ofstream(logFilePath);
+	moe_assert(ofs.is_open(), "LocalLog file open failed.");
 	if (!head.empty()) {
 		ofs << head << std::endl;
 	}

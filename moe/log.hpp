@@ -5,6 +5,7 @@
 #include <string_view>
 #include <fstream>
 #include "moe_macro.hpp"
+#include "stl_pro.hpp"
 #include <iostream>
 #include <vector>
 #include <chrono>
