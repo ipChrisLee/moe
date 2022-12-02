@@ -14,7 +14,7 @@ Kousaka Reina镇楼（误）。
 
 值得注意的是，当时[MoeCompiler使用的moe库](https://github.com/ipChrisLee/MoeCompiler/tree/moe/src/mlib)有非常明显的[过度设计](https://www.zhihu.com/question/19993179)的倾向，最直接的表现是：大多数我亲手写下的代码并不会被我自己用上哪怕一次，而用得上的代码里相当一部分又因为设计缺少思考导致极其难用。在吸取了这个教训之后，我改良了整个库的设计，让它保证：
 
-* 需要时增加。
+* 需要时增加功能。
 * 设计尽可能简单。
 * “傻子”都能使用。
 
