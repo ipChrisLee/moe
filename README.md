@@ -31,12 +31,12 @@ This lib provides some useful tools for C++ coding:
   auto toFilePath = std::string();
   auto dotFilePath = std::string();
   argParser.emplace_option(
-      'g', nullptr, false, [&addDebugInfo](const char *) {
+      'g', std::nullopt, false, [&addDebugInfo](const char *) {
           addDebugInfo = true;
       }
   );
   argParser.emplace_option(
-      0, "emit-llvm", false, [&emitLLVM](const char *) {
+      std::nullopt, "emit-llvm", false, [&emitLLVM](const char *) {
           emitLLVM = true;
       }
   );
@@ -46,12 +46,12 @@ This lib provides some useful tools for C++ coding:
       }
   );
   argParser.emplace_option(
-      'o', nullptr, true, [&toFilePath](const char * s) {
+      'o', std::nullopt, true, [&toFilePath](const char * s) {
           toFilePath = s;
       }
   );
   argParser.emplace_option(
-      0, "dot", true, [&dotFilePath](const char * s) {
+      std::nullopt, "dot", true, [&dotFilePath](const char * s) {
           dotFilePath = s;
       }
   );
