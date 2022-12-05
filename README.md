@@ -31,37 +31,39 @@ This lib provides some useful tools for C++ coding:
   auto toFilePath = std::string();
   auto dotFilePath = std::string();
   argParser.emplace_option(
-      'g', std::nullopt, false, [&addDebugInfo](const char *) {
+      'g', std::nullopt, false, [&addDebugInfo](std::string_view) {
           addDebugInfo = true;
       }
   );
   argParser.emplace_option(
-      std::nullopt, "emit-llvm", false, [&emitLLVM](const char *) {
+      std::nullopt, "emit-llvm", false, [&emitLLVM](std::string_view) {
           emitLLVM = true;
       }
   );
   argParser.emplace_option(
-      'v', "verbose", false, [&verbose](const char *) {
+      'v', "verbose", false, [&verbose](std::string_view) {
           verbose = true;
       }
   );
   argParser.emplace_option(
-      'o', std::nullopt, true, [&toFilePath](const char * s) {
+      'o', std::nullopt, true, [&toFilePath](std::string_view s) {
           toFilePath = s;
       }
   );
   argParser.emplace_option(
-      std::nullopt, "dot", true, [&dotFilePath](const char * s) {
+      std::nullopt, "dot", true, [&dotFilePath](std::string_view s) {
           dotFilePath = s;
       }
   );
   argParser.add_func_to_handle_non_option_arg(
-      [&fromFilePaths](const char * s) {
+      [&fromFilePaths](std::string_view s) {
           fromFilePaths.emplace_back(s);
       }
   );
   argParser.parse(argc, argv);
   ```
+
+  
 
 * Some useful concept, like `cloneable` support of C++ (use smart pointer):
 
