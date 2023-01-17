@@ -96,7 +96,7 @@ int main([[maybe_unused]]int argc, [[maybe_unused]]char ** argv) {
 	moe_slog_info("Hello 04");          //  normal
 	
 	std::cout << moe::set_decorator(moe::Decorator::c_blue) << moe::now::formatTime()
-	          << moe::reset_decorator() << std::endl;
+			  << moe::reset_decorator() << std::endl;
 	using namespace std::string_literals;
 	auto s = "12 23 abc \n\n xy \n"s;
 	auto res = moe::split_string_on_char(s, {'\n', ' '});
