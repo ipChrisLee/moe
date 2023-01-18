@@ -46,6 +46,8 @@
   * 增加了`_moe_cVar`宏，表示无意义的变量（比如用在`moe_defer`宏里）。
   * 改变了`MOE_CODE_POS`宏展开之后的样子，现在它可以在CLion中被识别及点进。
 
+# 如何使用
+
 To use this library with CMake, just clone this repo to the root of your project (we call it `projRoot`), and add these statements to your `projRoot/CMakeLists.txt`:
 
 ```cmake
@@ -61,5 +63,5 @@ target_link_libraries(YOUR_TARGET moe)
 
 And then you can use `#include <moe/decorator.hpp>`
 
-If you don't want `moe_demo` be one of your targets, just delete last two line of `moe/CMakeLists.txt`.s
+If you don't want `moe_demo` be one of your targets, just delete last two line of `moe/CMakeLists.txt`.
 
