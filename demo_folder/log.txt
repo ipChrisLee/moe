@@ -1,5 +1,0 @@
-[/Users/lee/Main/Proj/moe/moe/log.cpp::24 17:26]: Logger registered. 
-[/Users/lee/Main/Proj/moe/demo.cpp::90 17:26]: Hello 01 
-[/Users/lee/Main/Proj/moe/demo.cpp::91 17:26]: Hello 02 
-[/Users/lee/Main/Proj/moe/demo.cpp::96 17:26]: Hello 04 
-[/Users/lee/Main/Proj/moe/demo.cpp::18 17:26]: Hello fun!  void fun() 

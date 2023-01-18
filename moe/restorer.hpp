@@ -1,6 +1,7 @@
 #pragma once
 
 #include <typeinfo>
+#include <functional>
 #include "moe_macro.hpp"
 
 
@@ -29,6 +30,13 @@ class Restorer {
 	}
 };
 
+struct defer {
+	std::function<void(void)> f;
+	
+	~defer() { f(); }
+
+#define moe_defer(...) auto _moe_cVar = moe::defer{[&](){__VA_ARGS__}};
+};
 }
 /**
  * @brief A macro for auto-restore set.
@@ -38,4 +46,4 @@ class Restorer {
  * @note One line can only contain exact one macro.
  * @note Multiple usage of this macro in one scope will @b NOT cause fault.
  */
-#define moe_r_set(var, newVal) moe::Restorer<decltype(var)> MOE_CONCAT(__restorer,__LINE__) ((var),(newVal))
+#define moe_r_set(var, newVal) moe::Restorer<decltype(var)> MOE_CONCAT(__restorer,__COUNTER__) ((var),(newVal))
