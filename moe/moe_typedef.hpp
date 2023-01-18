@@ -1,6 +1,3 @@
-/* WARNING:
- *      Include this file may cause double definition problem(such as, you have defined u8 before.).
- */
 #pragma once
 
 #include <cstdint>
