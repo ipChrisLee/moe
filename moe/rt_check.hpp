@@ -36,7 +36,7 @@ std::string_view get_exit_info(ExitType panicType);
 
 #define moe_assert_with_msg(b, msg) if(1){ \
     if(!(b)){                   \
-        std::cerr << "Assert [" #b "] failed at [" MOE_CODE_POS "] with message [" msg "]." << std::endl; \
+        std::cerr << "Assert [" #b "] failed at [" MOE_CODE_POS "] with message [" << msg << "]." << std::endl; \
         moe::moe_exit(moe::ExitType::assert_failed);                             \
     }                         \
 }
