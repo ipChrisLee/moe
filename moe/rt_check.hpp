@@ -21,7 +21,7 @@ std::string_view get_exit_info(ExitType panicType);
 [[noreturn]] void moe_exit(ExitType exitType);
 
 
-[[noreturn]] void panic(std::string_view codePos, std::string_view msg="");
+[[noreturn]] void panic(std::string_view codePos, std::string_view msg = "");
 
 #define moe_panic(...) moe::panic(MOE_CODE_POS, ##__VA_ARGS__)
 
@@ -50,5 +50,7 @@ std::string_view get_exit_info(ExitType panicType);
 //  moe_assert(fun()) or moe_assert(fun(), "Haha")
 #define moe_assert(...) moe_assert_selector(__VA_ARGS__, moe_assert_with_msg(__VA_ARGS__),moe_assert_without_msg(__VA_ARGS__))
 
-#define moe_rt_warning(msg) if(1){ std::cerr << "Warning at [" MOE_CODE_POS "] with message [" msg "]". <<std::endl; }
+#define moe_rt_warning(msg) if(1){ \
+        std::cerr << "Warning at [" MOE_CODE_POS "] with message [" << msg << "]." << std::endl; \
+}
 }
