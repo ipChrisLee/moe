@@ -52,8 +52,13 @@ std::string_view get_exit_info(ExitType panicType);
 #define moe_rt_warning(msg) if(1){ \
     std::cerr << "Warning at [" MOE_CODE_POS "] with message [" << msg << "]." << std::endl; \
 }
+
 #define moe_not_implemented(msg) if(1) { \
     std::cerr << "Not implemented at [" MOE_CODE_POS "] with message [" << msg << "]." << std::endl; \
     moe::moe_exit(moe::ExitType::not_implemented);                                         \
+}
+
+#define moe_rt_deprecated_warning(msg) if(1) { \
+    std::cerr << "Deprecated function [" __PRETTY_FUNCTION__ "] at [" MOE_CODE_POS "] with message [" << msg << "]." << std::endl; \
 }
 }
