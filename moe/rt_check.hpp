@@ -50,7 +50,11 @@ std::string_view get_exit_info(ExitType panicType);
 #define moe_assert(...) moe_assert_selector(__VA_ARGS__, moe_assert_with_msg(__VA_ARGS__),moe_assert_without_msg(__VA_ARGS__))
 
 #define moe_rt_warning(msg) if(1){ \
-    std::cerr << "Warning at [" MOE_CODE_POS "] with message [" << msg << "]." << std::endl; \
+    static bool tmp = false;              \
+    if(!tmp){                                \
+        std::cerr << "Warning at [" MOE_CODE_POS "] with message [" << msg << "]." << std::endl; \
+        tmp = true;                                           \
+    }\
 }
 
 #define moe_not_implemented(msg) if(1) { \
@@ -59,6 +63,10 @@ std::string_view get_exit_info(ExitType panicType);
 }
 
 #define moe_rt_deprecated_warning(msg) if(1) { \
-    std::cerr << "Deprecated function [" << __PRETTY_FUNCTION__ << "] at [" MOE_CODE_POS "] with message [" << msg << "]." << std::endl; \
+    static bool tmp = false;              \
+    if(!tmp){                                \
+        std::cerr << "Deprecated function [" << __PRETTY_FUNCTION__ << "] at [" MOE_CODE_POS "] with message [" << msg << "]." << std::endl; \
+        tmp = true;                                           \
+    }\
 }
 }

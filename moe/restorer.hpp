@@ -35,7 +35,7 @@ struct defer {
 	
 	~defer() { f(); }
 
-#define moe_defer(...) auto _moe_cVar = moe::defer{[&](){__VA_ARGS__}};
+#define moe_defer(...) auto moe_cVar = moe::defer{[&](){__VA_ARGS__}};
 };
 }
 /**

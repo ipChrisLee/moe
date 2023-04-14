@@ -17,6 +17,11 @@ struct Tes {
 	}
 } tes;
 
+void deprecated_fun() {
+	moe_rt_deprecated_warning("");
+	moe_rt_warning("?");
+}
+
 int main([[maybe_unused]]int argc, [[maybe_unused]]char ** argv) {
 	using namespace std::string_literals;
 	auto s = "12 23 abc \n\n xy \n"s;
@@ -37,5 +42,7 @@ int main([[maybe_unused]]int argc, [[maybe_unused]]char ** argv) {
 		puts("bbb");
 	)
 	puts("ccc");
+	deprecated_fun();
+	deprecated_fun();
 	return 0;
 }

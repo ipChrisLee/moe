@@ -10,7 +10,7 @@
 #define MOE_CONTEXT_FILE __FILE__
 #define MOE_CONTEXT_LINE MOE_LINE_STR(__LINE__)
 
-#define _moe_cVar MOE_CONCAT(_DO_NOT_USE_THIS_VAR, __COUNTER__)
+#define moe_cVar MOE_CONCAT(_DO_NOT_USE_THIS_VAR, __COUNTER__)
 
 
 
