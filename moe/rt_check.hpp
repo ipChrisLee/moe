@@ -13,13 +13,12 @@ enum class ExitType : itype::i8 {
 	assert_failed = -128,
 	panic,
 	run_to_todo_func,
+	not_implemented,
 };
-
 
 std::string_view get_exit_info(ExitType panicType);
 
 [[noreturn]] void moe_exit(ExitType exitType);
-
 
 [[noreturn]] void panic(std::string_view codePos, std::string_view msg = "");
 
@@ -51,6 +50,10 @@ std::string_view get_exit_info(ExitType panicType);
 #define moe_assert(...) moe_assert_selector(__VA_ARGS__, moe_assert_with_msg(__VA_ARGS__),moe_assert_without_msg(__VA_ARGS__))
 
 #define moe_rt_warning(msg) if(1){ \
-        std::cerr << "Warning at [" MOE_CODE_POS "] with message [" << msg << "]." << std::endl; \
+    std::cerr << "Warning at [" MOE_CODE_POS "] with message [" << msg << "]." << std::endl; \
+}
+#define moe_not_implemented(msg) if(1) { \
+    std::cerr << "Not implemented at [" MOE_CODE_POS "] with message [" << msg << "]." << std::endl; \
+    moe::moe_exit(moe::ExitType::not_implemented);                                         \
 }
 }
